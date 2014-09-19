@@ -8,7 +8,8 @@
 #
 #  Functions:
 #    makeCacheMatrix - Creates a special matrix "object" that caches its inverse
-#    cacheSolve      - Wrapper for solve to run on special matrix object to use its cache functionality
+#    cacheSolve      - Wrapper for solve to run on special matrix object to use 
+#                      its cache functionality
 #
 #*/#########################################################################
 
@@ -80,7 +81,7 @@ makeCacheMatrix <- function(x = matrix(), size = 1, autoExtend = T) {
         searchInverse <- which((lapply(Inverse,matequal,y)) == T)
         
         ans <- c(0,0)
-        if (length(searchMatrix) == 0 && length(searchMatrix) == 0){
+        if (length(searchMatrix) == 0 && length(searchInverse) == 0){
             ans <- c(0,0)
         } else if (length(searchMatrix) > 0) {
             ans <- c(searchMatrix[1],0)  
@@ -272,6 +273,9 @@ makeCacheMatrix <- function(x = matrix(), size = 1, autoExtend = T) {
         list(CurrentFill = currentFill, TotalSize = size)
     }
     
+    getMatrix <- function () Matrix
+    getInverse <- function() Inverse
+    
     # Functions available to interact with this object
     list(set               = set, 
          get               = get, 
@@ -280,6 +284,7 @@ makeCacheMatrix <- function(x = matrix(), size = 1, autoExtend = T) {
          extend            = extend,   
          setAutoExtend     = setAutoExtend,
          getFillStatistics = getFillStatistics
+         ,getMatrix = getMatrix, getInverse = getInverse
     )
 }
 
